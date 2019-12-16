@@ -1,6 +1,6 @@
 import {html, render} from "./web_modules/lit-html.js";
 
-import './web_modules/@wonkytech/tm-examples.js';
+//import './web_modules/@wonkytech/tm-examples.js';
 
 // console.log('TM-EXAMPLES', window.customElements.get('tm-examples'));
 // console.log('', window.customElements.get('tm-examples'));
