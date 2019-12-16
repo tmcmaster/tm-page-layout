@@ -18,89 +18,136 @@ window.customElements.define('tm-page-layout', class extends LitElement {
     // noinspection JSUnusedGlobalSymbols
     static get properties() {
         return {
-            heading: {type: String}
+            title: {type: String}
         }
     }
 
     constructor() {
         super();
-        this.heading = 'Hello World!';
+        this.title = '';
     }
+
+    // slot[name=slot1]  ~ .siblingB
+    // slot[name=slot2]::slotted(.selectMeA)
+    // slot[name=slot2]::slotted(.selectMeC[name=myName])
 
     static get styles() {
         // language=CSS
         return css `
             :host {
-              display: inline-block;
+                display: inline-block;
+                --max-width: 1200px;
+                --min-width: 900px;
+                --toolbar-height: 60px;
             }
-            h2 {
-                color: gray;
+            app-drawer-layout {
+                width: 100vw;
+                height: 100vh;
+                box-sizing: border-box;
+                /*border: solid green 4px;*/
+            }
+
+            app-drawer {
+                display: inline-block;
+                padding: 2vmin;
+                //--app-drawer-width: 200px;
+            }
+            
+            slot[name=drawer] {
+                padding: 2vmin;
+                box-sizing: border-box;
+                border: solid green 4px;
             }
 
             app-header-layout {
                 overflow: hidden;
-                width:100vw;
-                height: 100vh;
+                width:100%;
+                height: 100%;
                 box-sizing: border-box;
-                border: solid red 2px;
+                //border: solid red 2px;
             }
 
             app-header {
                 width: 100%;
-            }
-            
-            app-header > header {
-                margin-top: -100px;
+                height: 30vmin;
+                box-sizing: border-box;
+                overflow: hidden;
+                color: white;
             }
 
-            app-toolbar {
-                
+            app-header > app-toolbar {
+                height: 10vmin;
+                box-sizing: border-box;
+                /*border: solid red 2px;*/
             }
-            article {
+            
+            app-header > section {
                 display: flex;
                 flex-direction: column;
-            }
-            header {
-                flex:auto;
-            }
-            nav {
-                
+                width: 100%;
+                height: 20vmin;
+                padding:2vmin;
+                box-sizing: border-box;
+                /*border: solid red 2px;*/
             }
             
-            main {
+            app-header > section > header {
                 flex: available;
+                box-sizing: border-box;
+                /*border: solid red 2px;*/
+            }
+
+            app-header > section > main {
+                flex: auto;
                 width: 100%;
-                display: inline-block;
-                height: 2000px;
-                background: lightpink;
-            }
-
-            footer {
-                flex:auto;
-                background: lightcyan;
-                height: 100px;
-            }
-
-            span.main {
-                display: inline-block;
-                height: 2000px;
-                background: lightpink;
-            }
-
-            div.header {
-                background: lightblue;
-                width: 100%;
-                height: 200px;
+                box-sizing: border-box;
+                /*border: solid red 2px;*/
             }
             
-            div.body {
-                width: 500px;
-                height: 500px;
-                background: lightcyan;
+            app-header > section > footer {
+                flex: available;
+                box-sizing: border-box;
+                /*border: solid red 2px;*/
             }
             
-            app-drawer {
-                //--app-drawer-width: 200px;
+
+            app-header-layout > section {
+                display: inline-block;
+                display:flex;
+                flex-direction: column;
+                min-height: calc(100vh - 30vmin);
+                padding:2vmin;
+                box-sizing: border-box;
+                //border: solid blue 2px;
+            }
+
+            app-header-layout > section > header {
+                display: inline-block;
+                flex: available;
+            } 
+            app-header-layout > section > main {
+                display: inline-block;
+                flex: auto;
+            }
+            app-header-layout > section > footer {
+                display: inline-block;
+                flex: available;
+            }
+            
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: -1;
+            }
+            
+            app-toolbar > h1 {
+                color: white;
+            }
+
+            slot[name=toolbar] {
+                color: white;
             }
         `;
     }
@@ -113,35 +160,29 @@ window.customElements.define('tm-page-layout', class extends LitElement {
         console.log('app-drawer-layout: ', window.customElements.get('app-drawer-layout'));
         console.log('app-drawer: ', window.customElements.get('app-drawer'));
         return html`
-            <app-drawer-layout>
-                <app-drawer slot="drawer" swipe-open>
-                    <h3>Menu</h3>
-                    <paper-input label="AAA" value="aaa"></paper-input>
-                    <slot name="draw"></slot>
+            <app-drawer-layout force-narrow>
+                <app-drawer slot="drawer" swipe-open >
+                    <slot name="drawer"></slot>
                 </app-drawer>
                 <app-header-layout has-scrolling-region responsive-width="1280px">
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                            <div main-title>App name</div>
-                            <slot name="toolbar">
-                                <a href="#">One</a>
-                                <a href="#">Two</a>
-                                <a href="#">Three</a>
-                            </slot>
+                            <h1 main-title>${this.title}</h1>
+                            <slot name="toolbar"></slot>
                         </app-toolbar>
-                        <header>
-                            <slot name="header">
-                                <div class="header"></div>
-                            </slot> 
-                        </header>
+                        <section>
+                            <header><slot name="header-top"></slot></header>
+                            <main><slot name="header-middle"></slot></main>
+                            <footer><slot name="header-bottom"></slot></footer>                        
+                        </section>
+                        <img src="../docs/images/Beach-Banner.jpg" />
                     </app-header>
-                    <main>
-                        <slot name="main"><span class="main">MAIN</span></slot>
-                    </main>
-                    <footer>
-                        <slot name="footer"><span>FOOTER</span></slot>
-                    </footer>
+                    <section>
+                        <header><slot name="main-top"></slot></header>
+                        <main><slot name="main-middle"></slot></main>
+                        <footer><slot name="main-bottom"></slot></footer>                        
+                    </section>
                 </app-header-layout>
             </app-drawer-layout>
             
