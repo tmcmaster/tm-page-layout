@@ -39,7 +39,11 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 --max-width: 1200px;
                 --min-width: 900px;
                 --toolbar-height: 60px;
+                --header-height: 30vh;
+                --header-image: none;
+                --header-color: darkgray;
             }
+
             app-drawer-layout {
                 width: 100vw;
                 height: 100vh;
@@ -50,9 +54,8 @@ window.customElements.define('tm-page-layout', class extends LitElement {
             app-drawer {
                 display: inline-block;
                 padding: 2vmin;
-                //--app-drawer-width: 200px;
             }
-            
+
             slot[name=drawer] {
                 padding: 2vmin;
                 box-sizing: border-box;
@@ -61,18 +64,19 @@ window.customElements.define('tm-page-layout', class extends LitElement {
 
             app-header-layout {
                 overflow: hidden;
-                width:100%;
+                width: 100%;
                 height: 100%;
                 box-sizing: border-box;
-                //border: solid red 2px;
             }
 
             app-header {
                 width: 100%;
-                height: 30vmin;
+                /*noinspection CssUnresolvedCustomProperty,CssInvalidFunction*/
+                height: var(--tm-page-layout-header-height, --header-height);
                 box-sizing: border-box;
                 overflow: hidden;
-                color: white;
+                /*noinspection CssUnresolvedCustomProperty,CssInvalidFunction*/
+                color: var(--tm-page-layout-header-color, --header-color);
             }
 
             app-header > app-toolbar {
@@ -80,17 +84,17 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 box-sizing: border-box;
                 /*border: solid red 2px;*/
             }
-            
+
             app-header > section {
                 display: flex;
                 flex-direction: column;
                 width: 100%;
                 height: 20vmin;
-                padding:2vmin;
+                padding: 2vmin;
                 box-sizing: border-box;
                 /*border: solid red 2px;*/
             }
-            
+
             app-header > section > header {
                 flex: available;
                 box-sizing: border-box;
@@ -103,51 +107,54 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 box-sizing: border-box;
                 /*border: solid red 2px;*/
             }
-            
+
             app-header > section > footer {
                 flex: available;
                 box-sizing: border-box;
                 /*border: solid red 2px;*/
             }
-            
+
 
             app-header-layout > section {
                 display: inline-block;
-                display:flex;
+                display: flex;
                 flex-direction: column;
                 min-height: calc(100vh - 30vmin);
-                padding:2vmin;
+                padding: 2vmin;
                 box-sizing: border-box;
-                //border: solid blue 2px;
             }
 
             app-header-layout > section > header {
                 display: inline-block;
                 flex: available;
-            } 
+            }
+
             app-header-layout > section > main {
                 display: inline-block;
                 flex: auto;
             }
+
             app-header-layout > section > footer {
                 display: inline-block;
                 flex: available;
             }
-            
-            img {
+
+            app-header > img {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 z-index: -1;
+                /*noinspection CssUnresolvedCustomProperty,CssInvalidFunction*/
+                content: var(--tm-page-layout-header-image, --header-image);
             }
-            
+
             app-toolbar > h1 {
-                color: white;
+                //color: var(--tm-page-layout-header-color, --header-color);
             }
 
             slot[name=toolbar] {
-                color: white;
+                //color: white;
             }
         `;
     }
@@ -176,7 +183,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                             <main><slot name="header-middle"></slot></main>
                             <footer><slot name="header-bottom"></slot></footer>                        
                         </section>
-                        <img src="../docs/images/Beach-Banner.jpg" />
+                        <img class="aa" src="" />
                     </app-header>
                     <section>
                         <header><slot name="main-top"></slot></header>

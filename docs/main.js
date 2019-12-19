@@ -24,13 +24,16 @@ render(html`
             <style>
                 html {
                     //--tm-page-layout-max-width: 1000px;
-                    --tm-page-layout-header-background: url('../docs/images/Beach-Banner.jpg');
+                    --tm-page-layout-header-height: 30vh;
+                    --tm-page-layout-header-image: url('images/Beach-Banner.jpg');
+                    --tm-page-layout-header-color: white;
                 }
                 span.main {
                     height: 1600px;
                     display:inline-block;
                     
                 }
+                
             </style>
             <tm-page-layout title="TITLE">
                 <div slot="drawer">DRAWER MENU</div>
