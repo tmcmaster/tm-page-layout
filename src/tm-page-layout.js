@@ -3,16 +3,6 @@ import {LitElement, css} from 'lit-element';
 
 import '@wonkytech/polymer-elements';
 
-// console.log('DOM-MODULE', window.customElements.get('dom-module'));
-// console.log('APP-DRAWER', window.customElements.get('app-drawer'));
-//
-// if (window.customElements.get('app-drawer') === undefined) {
-//     console.log('Loading Polymer Elements');
-//     import('@wonkytech/polymer-elements').then(() => {
-//         console.log('APP-DRAWER', window.customElements.get('app-drawer'));
-//     });
-// }
-
 window.customElements.define('tm-page-layout', class extends LitElement {
 
     // noinspection JSUnusedGlobalSymbols
@@ -27,12 +17,14 @@ window.customElements.define('tm-page-layout', class extends LitElement {
         this.title = '';
     }
 
-    // slot[name=slot1]  ~ .siblingB
-    // slot[name=slot2]::slotted(.selectMeA)
-    // slot[name=slot2]::slotted(.selectMeC[name=myName])
-
+    // noinspection JSUnusedGlobalSymbols
     static get styles() {
-        // language=CSS
+        // slot[name=slot1]  ~ .siblingB
+        // slot[name=slot2]::slotted(.selectMeA)
+        // slot[name=slot2]::slotted(.selectMeC[name=myName])
+
+
+        // language=CSS  noinspection CssInvalidHtmlTagReference
         return css `
             :host {
                 display: inline-block;
@@ -116,7 +108,6 @@ window.customElements.define('tm-page-layout', class extends LitElement {
 
 
             app-header-layout > section {
-                display: inline-block;
                 display: flex;
                 flex-direction: column;
                 min-height: calc(100vh - 30vmin);
@@ -150,22 +141,30 @@ window.customElements.define('tm-page-layout', class extends LitElement {
             }
 
             app-toolbar > h1 {
-                //color: var(--tm-page-layout-header-color, --header-color);
+            / / color: var(--tm-page-layout-header-color, --header-color);
             }
 
             slot[name=toolbar] {
-                //color: white;
+                color: white;
+            }
+
+            /*noinspection CssUnusedSymbol*/
+            div.toolbar {
+                display: inline-block;
+                box-sizing: border-box;
+
             }
         `;
     }
 
     // noinspection JSUnusedGlobalSymbols
     render() {
-        console.log('app-header-layout: ', window.customElements.get('app-header-layout'));
-        console.log('app-header: ', window.customElements.get('app-header'));
-        console.log('app-toolbar: ', window.customElements.get('app-toolbar'));
-        console.log('app-drawer-layout: ', window.customElements.get('app-drawer-layout'));
-        console.log('app-drawer: ', window.customElements.get('app-drawer'));
+        console.log('app-header-layout: ', window.customElements.get('app-header-layout') !== undefined);
+        console.log('app-header: ', window.customElements.get('app-header') !== undefined);
+        console.log('app-toolbar: ', window.customElements.get('app-toolbar') !== undefined);
+        console.log('app-drawer-layout: ', window.customElements.get('app-drawer-layout') !== undefined);
+        console.log('app-drawer: ', window.customElements.get('app-drawer') !== undefined);
+
         return html`
             <app-drawer-layout force-narrow>
                 <app-drawer slot="drawer" swipe-open >
@@ -176,14 +175,14 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                         <app-toolbar>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                             <h1 main-title>${this.title}</h1>
-                            <slot name="toolbar"></slot>
+                            <div class="toolbar"><slot name="toolbar"></slot></div>
                         </app-toolbar>
                         <section>
                             <header><slot name="header-top"></slot></header>
                             <main><slot name="header-middle"></slot></main>
                             <footer><slot name="header-bottom"></slot></footer>                        
                         </section>
-                        <img class="aa" src="" />
+                        <img alt="Banner Image"/>
                     </app-header>
                     <section>
                         <header><slot name="main-top"></slot></header>
@@ -191,48 +190,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                         <footer><slot name="main-bottom"></slot></footer>                        
                     </section>
                 </app-header-layout>
-            </app-drawer-layout>
-            
-            
-            <!--app-header-layout has-scrolling-region>
-                <app-header slot="header" condenses effects="waterfall">
-                    <app-toolbar>
-                        <h4 main-title>Application Name</h4>
-                        <nav>
-                            <a href="#">One</a>
-                            <a href="#">Two</a>
-                            <a href="#">Three</a>
-                        </nav>
-                    </app-toolbar>
-                    <main>
-                        <slot name="header">
-                            <div class="header"></div>
-                        </slot> 
-                    </main>
-                </app-header>
-                
-                <article>
-                    <header>
-                        <nav>
-                            <slot name="nav">
-                                <vaadin-tabs>
-                                    <vaadin-tab>One</vaadin-tab>
-                                    <vaadin-tab>Two</vaadin-tab>
-                                    <vaadin-tab>Three</vaadin-tab>
-                                </vaadin-tabs>
-                            </slot> 
-                        </nav>
-                    </header>
-                    <main>
-                        <slot name="main"><span class="main">MAIN</span></slot>
-                    </main>
-                    <footer>
-                        <slot name="footer"><span>FOOTER</span></slot>
-                    </footer>
-                </article>
-            </app-header-layout-->
-            
-            
+            </app-drawer-layout>      
         `;
     }
 });

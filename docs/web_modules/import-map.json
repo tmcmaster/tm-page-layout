@@ -1,7 +1,7 @@
 {
   "imports": {
-    "@wonkytech/tm-examples": "./@wonkytech/tm-examples.js",
     "@wonkytech/polymer-elements": "./@wonkytech/polymer-elements.js",
+    "@wonkytech/tm-examples": "./@wonkytech/tm-examples.js",
     "@wonkytech/tm-page-layout": "./@wonkytech/tm-page-layout.js"
   }
 }

@@ -4,8 +4,8 @@
         "build": "npm update && npm run web"
     },
     "dependencies": {
-        "@wonkytech/tm-examples": "~0.1",
         "@wonkytech/polymer-elements": "0.0.17",
-        "@wonkytech/tm-page-layout": "~0.0"
+        "@wonkytech/tm-examples": "~0.1",
+        "@wonkytech/tm-page-layout": "0.0.4"
     }
 }

@@ -1,10 +1,5 @@
 import {html, render} from "./web_modules/lit-html.js";
 
-//import './web_modules/@wonkytech/tm-examples.js';
-
-// console.log('TM-EXAMPLES', window.customElements.get('tm-examples'));
-// console.log('', window.customElements.get('tm-examples'));
-
 let sites = {
     'src': 'https://github.com/tmcmaster/tm-page-layout',
     'pika': 'https://www.pika.dev/npm/@wonkytech/tm-page-layout',
@@ -31,7 +26,6 @@ render(html`
                 span.main {
                     height: 1600px;
                     display:inline-block;
-                    
                 }
                 
             </style>
