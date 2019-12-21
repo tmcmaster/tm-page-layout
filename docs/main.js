@@ -13,9 +13,12 @@ render(html`
           padding: 0;
           margin: 0;
         } 
+        tm-page-layout {
+            height: 80vh;
+        }
     </style>
     <tm-examples heading="Page Layout" .sites="${sites}">
-        <section title="Label Slots">
+        <section title="Example One">
             <style>
                 html {
                     //--tm-page-layout-max-width: 1000px;
@@ -24,7 +27,7 @@ render(html`
                     --tm-page-layout-header-color: white;
                 }
                 span.main {
-                    height: 1600px;
+                    height: 1000px;
                     display:inline-block;
                 }
             </style>
