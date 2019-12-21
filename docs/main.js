@@ -27,7 +27,6 @@ render(html`
                     height: 1600px;
                     display:inline-block;
                 }
-                
             </style>
             <tm-page-layout title="TITLE">
                 <div slot="drawer">DRAWER MENU</div>
@@ -37,23 +36,10 @@ render(html`
                 <div slot="header-bottom">HEADER BOTTOM</div>
                 <div slot="main-top">MAIN TOP</div>
                 <div slot="main-middle">
-                    <span class="main" style="height:1600px;">MAIN MIDDLE</span>
+                    <span class="main">MAIN MIDDLE</span>
                 </div>
                 <div slot="main-bottom">MAIN BOTTOM</div>
             </tm-page-layout>
         </section>
-<!--        <section title="Example">-->
-<!--            <tm-page-layout>-->
-<!--                <div slot="drawer">-->
-<!--                    <h3>Menu</h3>-->
-<!--                    <paper-input label="AAA" value="aaa"></paper-input>-->
-<!--                </div>-->
-<!--                <div slot="toolbar">-->
-<!--                    <a href="#">One</a>-->
-<!--                    <a href="#">Two</a>-->
-<!--                    <a href="#">Three</a>-->
-<!--                </div>-->
-<!--            </tm-page-layout>-->
-<!--        </section>-->
     </tm-examples>
 `, document.querySelector('body'));

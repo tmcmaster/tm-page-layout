@@ -17,6 +17,10 @@ window.customElements.define('tm-page-layout', class extends LitElement {
         this.title = '';
     }
 
+    notifyResize() {
+        this.shadowRoot.getElementById('header-layout').notifyResize();
+    }
+
     // noinspection JSUnusedGlobalSymbols
     static get styles() {
         // slot[name=slot1]  ~ .siblingB
@@ -170,7 +174,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 <app-drawer slot="drawer" swipe-open >
                     <slot name="drawer"></slot>
                 </app-drawer>
-                <app-header-layout has-scrolling-region responsive-width="1280px">
+                <app-header-layout id="header-layout" has-scrolling-region responsive-width="1280px">
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
                             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
