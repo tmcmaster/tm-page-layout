@@ -1,4 +1,4 @@
-import '../common/disable-upgrade-mixin-ae41579f.js';
+import '../common/disable-upgrade-mixin-d188d076.js';
 import './polymer-elements.js';
 import { L as LitElement, c as css, h as html } from '../common/lit-element-54503d46.js';
 
@@ -8,6 +8,9 @@ window.customElements.define('tm-page-layout', class extends LitElement {
     return {
       title: {
         type: String
+      },
+      drawer: {
+        type: Boolean
       }
     };
   }
@@ -15,6 +18,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
   constructor() {
     super();
     this.title = '';
+    this.drawer = false;
   }
 
   notifyResize() {
@@ -32,11 +36,19 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 display: inline-block;
                 width:100%;
                 height: 100%;
+              
                 --max-width: 1200px;
                 --toolbar-height: 60px;
                 --header-height: 30vh;
                 --header-image: none;
                 --header-color: darkgray;
+
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
             }
 
             app-drawer-layout {
@@ -169,9 +181,12 @@ window.customElements.define('tm-page-layout', class extends LitElement {
     console.log('app-drawer: ', window.customElements.get('app-drawer') !== undefined);
     return html`
             <app-drawer-layout force-narrow>
-                <app-drawer slot="drawer" swipe-open >
-                    <slot name="drawer"></slot>
-                </app-drawer>
+                ${this.drawer ? html`
+                    <app-drawer slot="drawer" swipe-open >
+                        <slot name="drawer"></slot>
+                    </app-drawer>
+                ` : html``}
+ 
                 <app-header-layout id="header-layout" has-scrolling-region responsive-width="1280px">
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
