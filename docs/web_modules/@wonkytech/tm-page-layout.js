@@ -30,8 +30,9 @@ window.customElements.define('tm-page-layout', class extends LitElement {
     return css`
             :host {
                 display: inline-block;
+                width:100%;
+                height: 100%;
                 --max-width: 1200px;
-                --min-width: 900px;
                 --toolbar-height: 60px;
                 --header-height: 30vh;
                 --header-image: none;
@@ -39,8 +40,8 @@ window.customElements.define('tm-page-layout', class extends LitElement {
             }
 
             app-drawer-layout {
-                width: 100vw;
-                height: 100vh;
+                width: 100%;
+                height: 100%;
                 box-sizing: border-box;
                 /*border: solid green 4px;*/
             }
@@ -53,7 +54,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
             slot[name=drawer] {
                 padding: 2vmin;
                 box-sizing: border-box;
-                border: solid green 4px;
+                //border: solid green 4px;
             }
 
             app-header-layout {

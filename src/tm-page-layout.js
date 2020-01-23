@@ -2,41 +2,52 @@ import {html} from 'lit-html';
 import {LitElement, css} from 'lit-element';
 
 window.customElements.define('tm-page-layout', class extends LitElement {
-
     // noinspection JSUnusedGlobalSymbols
     static get properties() {
         return {
-            title: {type: String}
-        }
+            title: {
+                type: String
+            },
+            drawer: {
+                type: Boolean
+            }
+        };
     }
 
     constructor() {
         super();
         this.title = '';
+        this.drawer = false;
     }
 
     notifyResize() {
         this.shadowRoot.getElementById('header-layout').notifyResize();
-    }
+    } // noinspection JSUnusedGlobalSymbols
 
-    // noinspection JSUnusedGlobalSymbols
+
     static get styles() {
         // slot[name=slot1]  ~ .siblingB
         // slot[name=slot2]::slotted(.selectMeA)
         // slot[name=slot2]::slotted(.selectMeC[name=myName])
-
-
         // language=CSS  noinspection CssInvalidHtmlTagReference
-        return css `
+        return css`
             :host {
                 display: inline-block;
                 width:100%;
                 height: 100%;
+              
                 --max-width: 1200px;
                 --toolbar-height: 60px;
                 --header-height: 30vh;
                 --header-image: none;
                 --header-color: darkgray;
+
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
             }
 
             app-drawer-layout {
@@ -158,21 +169,23 @@ window.customElements.define('tm-page-layout', class extends LitElement {
 
             }
         `;
-    }
+    } // noinspection JSUnusedGlobalSymbols
 
-    // noinspection JSUnusedGlobalSymbols
+
     render() {
         console.log('app-header-layout: ', window.customElements.get('app-header-layout') !== undefined);
         console.log('app-header: ', window.customElements.get('app-header') !== undefined);
         console.log('app-toolbar: ', window.customElements.get('app-toolbar') !== undefined);
         console.log('app-drawer-layout: ', window.customElements.get('app-drawer-layout') !== undefined);
         console.log('app-drawer: ', window.customElements.get('app-drawer') !== undefined);
-
         return html`
             <app-drawer-layout force-narrow>
-                <app-drawer slot="drawer" swipe-open >
-                    <slot name="drawer"></slot>
-                </app-drawer>
+                ${(this.drawer ? html`
+                    <app-drawer slot="drawer" swipe-open >
+                        <slot name="drawer"></slot>
+                    </app-drawer>
+                ` : html``)}
+ 
                 <app-header-layout id="header-layout" has-scrolling-region responsive-width="1280px">
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
@@ -196,4 +209,5 @@ window.customElements.define('tm-page-layout', class extends LitElement {
             </app-drawer-layout>      
         `;
     }
+
 });

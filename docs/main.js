@@ -31,7 +31,7 @@ render(html`
                     display:inline-block;
                 }
             </style>
-            <tm-page-layout title="TITLE">
+            <tm-page-layout title="TITLE" drawer>
                 <div slot="drawer">DRAWER MENU</div>
                 <div slot="toolbar">TOOLBAR MENU</div>
                 <div slot="header-top">HEADER TOP</div>
