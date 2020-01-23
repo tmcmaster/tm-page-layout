@@ -184,7 +184,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
         return html`
             <app-drawer-layout force-narrow>
                 ${this.drawer ? html`
-                    <app-drawer id="drawer" slot="drawer" swipe-open @click="${(e) => this.shadowRoot.getElementById('drawer').close()}">
+                    <app-drawer id="drawer" slot="drawer" swipe-open >
                         <slot name="drawer"></slot>
                     </app-drawer>
                 ` : html``}
@@ -193,7 +193,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
                             ${this.drawer ? html`
-                                <mwc-icon class="menu" @click="${(e) => this.shadowRoot.getElementById('drawer').open()}">menu</mwc-icon>
+                                <mwc-icon class="menu" @click="${e => this.openDrawer()}">menu</mwc-icon>
                             ` : html``}
                             <h1 main-title>${this.title}</h1>
                             <div class="toolbar"><slot name="toolbar"></slot></div>
@@ -215,4 +215,13 @@ window.customElements.define('tm-page-layout', class extends LitElement {
         `;
     }
 
+    closeDrawer() {
+        this.shadowRoot.getElementById('drawer').close();
+    }
+
+    openDrawer() {
+        this.shadowRoot.getElementById('drawer').open();
+    }
+
 });
+
