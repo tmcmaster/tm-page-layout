@@ -169,6 +169,9 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 box-sizing: border-box;
 
             }
+            mwc-icon.menu {
+                margin-right: 10px;
+            }
         `;
   } // noinspection JSUnusedGlobalSymbols
 
@@ -182,7 +185,7 @@ window.customElements.define('tm-page-layout', class extends LitElement {
     return html`
             <app-drawer-layout force-narrow>
                 ${this.drawer ? html`
-                    <app-drawer slot="drawer" swipe-open >
+                    <app-drawer id="drawer" slot="drawer" swipe-open @click="${e => this.shadowRoot.getElementById('drawer').close()}">
                         <slot name="drawer"></slot>
                     </app-drawer>
                 ` : html``}
@@ -190,7 +193,9 @@ window.customElements.define('tm-page-layout', class extends LitElement {
                 <app-header-layout id="header-layout" has-scrolling-region responsive-width="1280px">
                     <app-header slot="header" condenses reveals effects="waterfall">
                         <app-toolbar>
-                            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                            ${this.drawer ? html`
+                                <mwc-icon class="menu" @click="${e => this.shadowRoot.getElementById('drawer').open()}">menu</mwc-icon>
+                            ` : html``}
                             <h1 main-title>${this.title}</h1>
                             <div class="toolbar"><slot name="toolbar"></slot></div>
                         </app-toolbar>
